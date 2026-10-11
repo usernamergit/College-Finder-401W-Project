@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Find jobs{% endblock %}
+
+{% block content %}
+  <h1>Find jobs</h1>
+  <p>Demo listings for New England.</p>
+
+  <form method="get">
+    <input type="text" name="q" value="{{ q }}" placeholder="engineer, analyst, Providence">
+    <button type="submit">Search</button>
+  </form>
+
+  <ul>
+    {% for job in jobs %}
+      <li>
+        <strong>{{ job.title }}</strong>
+        — {{ job.company }} ({{ job.location }})
+        · <a href="{{ job.url }}">Info</a>
+      </li>
+    {% empty %}
+      <li>No matching demo jobs.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

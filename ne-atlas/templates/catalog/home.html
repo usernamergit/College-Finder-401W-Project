@@ -1,0 +1,62 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Explore programs{% endblock %}
+
+{% block content %}
+<div class="layout">
+  <aside class="rail">
+    <h2>Options</h2>
+    <form method="get">
+      <label>Colleges around</label>
+      <select name="state">
+        <option value="">All New England</option>
+        {% for code, label in states %}
+          <option value="{{ code }}" {% if state == code %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Tuition range</label>
+      <select name="tuition">
+        <option value="">Any tuition</option>
+        {% for value, label in tuition_ranges %}
+          <option value="{{ value }}" {% if tuition == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Field of study</label>
+      <select name="field">
+        <option value="">Any field</option>
+        {% for value, label in fields %}
+          <option value="{{ value }}" {% if field == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Apply</button>
+
+      <label>Page color</label>
+      <input class="bg-picker" type="color" value="#e8b7f0">
+    </form>
+  </aside>
+
+  <section class="canvas">
+    <p>{{ colleges|length }} schools</p>
+    <div class="grid">
+      {% for c in colleges %}
+        <a class="card" href="/school/{{ c.unit_id }}/">
+          <h3>{{ c.institution_name }}</h3>
+          <div class="inner">
+            <ul>
+              <li>Located in: {{ c.city }}, {{ c.state_code }}</li>
+              {% if c.institution_url %}
+                <li>Website listed</li>
+              {% endif %}
+            </ul>
+          </div>
+        </a>
+      {% empty %}
+        <p>No schools match those filters.</p>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

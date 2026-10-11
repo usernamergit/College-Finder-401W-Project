@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}NE Atlas{% endblock %}</title>
+  <link rel="icon" type="image/jpg" href="{% static 'images/favicon.jpg' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  <header>
+    <strong>NE Atlas</strong>
+    <nav>
+      <a href="/">Explore</a>
+      <a href="/compare/">Compare</a>
+      <a href="/resume/1/">Resume</a>
+      <a href="/jobs/">Find jobs</a>
+      <a href="/admin/">Login</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{% static 'js/bgColorPicker.js' %}"></script>
+</body>
+</html>
